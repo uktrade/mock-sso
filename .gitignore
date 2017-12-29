@@ -1,0 +1,6 @@
+node_modules/
+.idea/
+.env
+npm*.log
+package-lock.json
+widget-example/styles.css
