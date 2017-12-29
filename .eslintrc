@@ -1,0 +1,27 @@
+{
+  "extends": "standard",
+  "plugins": ["jest"],
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "ignore"
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error"
+  }
+}
+
