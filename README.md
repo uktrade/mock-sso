@@ -1,10 +1,11 @@
 # Mock SSO
 
-An simple app for testing the cogs involved with SSO integration. Simply replies back with the Bearer you send.
+A simple app for testing the cogs involved with SSO integration. Simply replies back with the Bearer you send.
 
 [![Build Status](https://travis-ci.org/uktrade/mock-sso.svg?branch=master)](https://travis-ci.org/uktrade/mock-sso)
 
 ## Table of contents
+- [Kudos](#kudos)
 - [Environment variables](#environment-variables)
 - [Development](#development)
   - [Setup](#setup)
@@ -12,17 +13,23 @@ An simple app for testing the cogs involved with SSO integration. Simply replies
   - [Tests](#tests)
   - [Linting](#linting)
 - [Endpoints](#endpoints)
+  - [/o/introspect](#get-introspect)
   - [/o/authorize](#get-oauthorize)
     - [Query parameters](#query-parameters)
   - [/o/token](#post-otoken)
     - [Body parameters](#body-parameters)
   - [/healthcheck](#get-healthcheck)
 - [Docker](#docker)
+  - [Automated build](#automated-build)
+
+## Kudos
+Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4vi/fakesso)
 
 ## Environment variables
-| Name          | Description                               |
-|:--------------|:------------------------------------------|
-| MOCK_SSO_PORT | The applications port, defaults to `8080` |
+| Name          |  Description                               |
+|:---------------|:------------------------------------------|
+| MOCK_SSO_PORT  | The applications port, defaults to `8080` |
+| MOCK_SSO_SCOPE | The required introspect scope             |
 
 ## Development
 ### Setup
@@ -58,7 +65,17 @@ $ npm run lint
 ```
 
 ## Endpoints
-### GET: /o/authorize
+### /o/introspect
+A `POST` request to `/o/introspect` will reply back with a 200 and the following the response
+```
+{
+  active: true,
+  exp: 1000000000,
+  scope: <MOCK_SSO_SCOPE>,
+}
+```
+
+### /o/authorize
 A `GET` request to `/o/authorize` will redirect you back to `redirect_uri?state=<state>&code=<code>`
 
 #### Query parameters
@@ -68,7 +85,7 @@ A `GET` request to `/o/authorize` will redirect you back to `redirect_uri?state=
 |`state`        | Your applications stateId                   |
 |`code`         | The token you wish to be sent back from SSO |
 
-### POST: /o/token
+### /o/token
 A `POST` request to `/o/token` will reply with you back to you with a JSON response of 
 ```
 {
@@ -77,7 +94,7 @@ A `POST` request to `/o/token` will reply with you back to you with a JSON respo
 }
 ```
 
-### GET: /healthcheck
+### /healthcheck
 A `GET` request to `/healthcheck` will reply with you back to you with a 200 and "OK"
 
 #### Body parameters
@@ -85,5 +102,17 @@ A `GET` request to `/healthcheck` will reply with you back to you with a 200 and
 |:--------------|:--------------------------------------------|
 |`code`         | The token you wish to be sent back from SSO |
 
-## Docker
 
+## Docker
+To build a docker image
+```
+$ docker build -t sso-mock .
+```
+
+To run locally
+```
+$ docker run -p 8080:8080 -d sso-mock
+```
+
+### Automated build
+There is also a docker automated build setup for this repository. This can be found at https://hub.docker.com/r/ukti/mock-sso
