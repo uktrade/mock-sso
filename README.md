@@ -10,11 +10,11 @@ An simple app for testing the cogs involved with SSO integration. Simply replies
   - [Tests](#tests)
   - [Linting](#linting)
 - [Endpoints](#endpoints)
-  - [GET: /o/authorize](#get-oauthorize)
+  - [/o/authorize](#get-oauthorize)
     - [Query parameters](#query-parameters)
-  - [POST: /o/token](#post-otoken)
+  - [/o/token](#post-otoken)
     - [Body parameters](#body-parameters)
-  - [### GET: /healthcheck](#get-healthcheck)
+  - [/healthcheck](#get-healthcheck)
 - [Docker](#docker)
 
 ## Environment variables
