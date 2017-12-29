@@ -2,6 +2,8 @@
 
 An simple app for testing the cogs involved with SSO integration. Simply replies back with the Bearer you send.
 
+[![Build Status](https://travis-ci.org/uktrade/mock-sso.svg?branch=master)](https://travis-ci.org/uktrade/mock-sso)
+
 ## Table of contents
 - [Environment variables](#environment-variables)
 - [Development](#development)
