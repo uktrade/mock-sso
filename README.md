@@ -26,10 +26,11 @@ A simple app for testing the cogs involved with SSO integration. Simply replies 
 Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4vi/fakesso)
 
 ## Environment variables
-| Name          |  Description                               |
-|:---------------|:------------------------------------------|
-| MOCK_SSO_PORT  | The applications port, defaults to `8080` |
-| MOCK_SSO_SCOPE | The required introspect scope             |
+| Name                |  Description                                  |
+|:--------------------|:----------------------------------------------|
+| MOCK_SSO_PORT       | The applications port, defaults to `8080`     |
+| MOCK_SSO_USERNAME   | The SSO username to create an SSO token for   |
+| MOCK_SSO_SCOPE      | The required introspect scope                 |
 
 ## Development
 ### Setup
@@ -66,12 +67,24 @@ $ npm run lint
 
 ## Endpoints
 ### /o/introspect
+Introspect uses the [rfc7662](https://tools.ietf.org/html/rfc7662) specification.
+
 A `POST` request to `/o/introspect` will reply back with a 200 and the following the response
 ```
 {
-  active: true,
-  exp: 1000000000,
-  scope: <MOCK_SSO_SCOPE>,
+  "active": true,
+  "exp": 2524608000,
+  "scope": <MOCK_SSO_SCOPE>
+}
+```
+If you wish to create an SSO token you can provide the username that you wish to associate the token with via the
+environment variable `MOCK_SSO_USERNAME`. This will then return the following response:
+```
+{
+  "active": true,
+  "exp": 2524608000,
+  "scope": <MOCK_SSO_SCOPE>,
+  "username": <MOCK_SSO_USERNAME>
 }
 ```
 
