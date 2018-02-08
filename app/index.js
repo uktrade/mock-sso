@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 
-const { port, scope } = require('./config')
+const { port, scope, username } = require('./config')
 
 const oAuthAuthorize = require('./oauth/authorize')
 const oAuthToken = require('./oauth/token')
@@ -15,7 +15,7 @@ app.use(morgan('dev'))
 
 app.get('/o/authorize', oAuthAuthorize())
 app.post('/o/token', parseFormData(), oAuthToken())
-app.post('/o/introspect', oAuthIntrospect(scope))
+app.post('/o/introspect', oAuthIntrospect(scope, username))
 app.get('/healthcheck', ping)
 
 app.use(catchAllErrors())
