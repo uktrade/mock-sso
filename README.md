@@ -18,6 +18,9 @@ A simple app for testing the cogs involved with SSO integration. Simply replies 
     - [Query parameters](#query-parameters)
   - [/o/token](#post-otoken)
     - [Body parameters](#body-parameters)
+  - [/api/v1/user/me/](#get-user)
+    - [Body parameters](#body-parameters)
+  
   - [/healthcheck](#get-healthcheck)
 - [Docker](#docker)
   - [Automated build](#automated-build)
@@ -104,6 +107,31 @@ A `POST` request to `/o/token` will reply with you back to you with a JSON respo
 {
   access_token: <code>,
   token_type: 'Bearer',
+}
+```
+
+### /api/v1/user/me/
+A `POST` request to `/api/v1/user/me/` will reply with you back to you with a JSON response of 
+```
+{
+    email: <email>,
+    user_id: <id>,
+    first_name: <string>,
+    last_name: <string>,
+    related_emails: [],
+    groups: [],
+    permitted_applications: [
+        {
+            key: <key>,
+            url: <url>,
+            name: <string>
+        },
+        ...
+    ],
+    access_profiles: [
+      <string>,
+      ...
+    ]
 }
 ```
 
