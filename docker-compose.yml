@@ -1,0 +1,8 @@
+version: "3"
+services:
+  mocksso:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    env_file: .env

@@ -155,5 +155,19 @@ To run locally
 $ docker run -p 8080:8080 -d sso-mock
 ```
 
+## Docker Compose
+
+To run this project under docker-compose, do the following:
+
+1.  Create a `.env` file
+    
+    ```shell
+    cp sample.env .env
+    ```
+
+2.  Set the environment variables within your `.env` file as appropriate.
+
+3.  Run `docker-compose up`
+
 ### Automated build
 There is also a docker automated build setup for this repository. This can be found at https://hub.docker.com/r/ukti/mock-sso
