@@ -4,3 +4,4 @@ node_modules/
 npm*.log
 package-lock.json
 widget-example/styles.css
+.bin

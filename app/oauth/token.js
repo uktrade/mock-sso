@@ -1,8 +1,7 @@
-const { get } = require('lodash')
 
 const token = () => {
   return function (req, res, next) {
-    const { code } = get(req, 'fields')
+    const { code } = req.fields
 
     if (code) {
       return res.status(200).send({

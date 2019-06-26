@@ -20,7 +20,7 @@ A simple app for testing the cogs involved with SSO integration. Simply replies 
     - [Body parameters](#body-parameters)
   - [/api/v1/user/me/](#get-user)
     - [Body parameters](#body-parameters)
-  
+
   - [/healthcheck](#get-healthcheck)
 - [Docker](#docker)
   - [Automated build](#automated-build)
@@ -29,17 +29,19 @@ A simple app for testing the cogs involved with SSO integration. Simply replies 
 Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4vi/fakesso)
 
 ## Environment variables
-| Name                |  Description                                  |
-|:--------------------|:----------------------------------------------|
-| MOCK_SSO_PORT       | The applications port, defaults to `8080`     |
-| MOCK_SSO_USERNAME   | The SSO username to create an SSO token for   |
-| MOCK_SSO_SCOPE      | The required introspect scope                 |
+| Name                    |  Description                                    |
+|:------------------------|:------------------------------------------------|
+| MOCK_SSO_PORT           | The applications port, defaults to `8080`       |
+| MOCK_SSO_USERNAME       | The SSO username to create an SSO token for.    |
+| MOCK_SSO_SCOPE          | The required introspect scope                   |
+| MOCK_SSO_TOKEN          | The required user token for optional validation |
+| MOCK_SSO_VALIDATE_TOKEN | Whether to validate the token for the user      |
 
 ## Development
 ### Setup
 Recommended setup
-- [Node.js](https://nodejs.org/en/) >= 8.5.0
-- [npm](https://www.npmjs.com/) >= 5.6.0 
+- [Node.js](https://nodejs.org/en/) >= 10.16.0
+- [npm](https://www.npmjs.com/) >= 6.9.0
 
 To install multiple versions of Node.js, you may find it easier to use a node version manager
 - [nvm](https://github.com/creationix/nvm)
@@ -102,7 +104,7 @@ A `GET` request to `/o/authorize` will redirect you back to `redirect_uri?state=
 |`code`         | The token you wish to be sent back from SSO |
 
 ### /o/token
-A `POST` request to `/o/token` will reply with you back to you with a JSON response of 
+A `POST` request to `/o/token` will reply with you back to you with a JSON response of
 ```
 {
   access_token: <code>,
@@ -111,7 +113,18 @@ A `POST` request to `/o/token` will reply with you back to you with a JSON respo
 ```
 
 ### /api/v1/user/me/
-A `POST` request to `/api/v1/user/me/` will reply with you back to you with a JSON response of 
+A `POST` request to `/api/v1/user/me/` will reply back to you with:
+
+#### Without an Authorization header or missing Bearer prefix
+
+A `statusCode` of 400 and a JSON response of
+```
+{ error: 'invalid_request' }
+```
+
+#### With the correct header
+
+A `statusCode` of 200 and a JSON response of
 ```
 {
     email: <email>,
@@ -160,7 +173,7 @@ $ docker run -p 8080:8080 -d sso-mock
 To run this project under docker-compose, do the following:
 
 1.  Create a `.env` file
-    
+
     ```shell
     cp sample.env .env
     ```

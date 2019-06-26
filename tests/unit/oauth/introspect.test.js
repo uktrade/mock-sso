@@ -1,6 +1,6 @@
 const introspect = require('../../../app/oauth/introspect.js')
 
-describe('#ping', () => {
+describe('#introspect', () => {
   beforeEach(() => {
     this.mockScope = 'mock:scope'
     this.nextMock = jest.fn()
