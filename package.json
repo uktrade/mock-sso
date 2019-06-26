@@ -12,8 +12,8 @@
     "url": "https://github.com/uktrade/mock-sso"
   },
   "engines": {
-    "node": "8.9.3",
-    "npm": "5.x"
+    "node": "10.16.0",
+    "npm": "6.x"
   },
   "author": "Ben Chidgey <ben@feedmypixel.com> (http://feedmypixel.com)",
   "contributors": [
@@ -41,7 +41,6 @@
   "dependencies": {
     "express": "^4.16.2",
     "formidable": "^1.1.1",
-    "lodash": "^4.17.4",
     "morgan": "^1.9.0"
   }
 }

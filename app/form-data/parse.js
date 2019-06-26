@@ -1,4 +1,3 @@
-const { assign } = require('lodash')
 const formidable = require('formidable')
 
 const parse = () => {
@@ -10,7 +9,10 @@ const parse = () => {
         return next(error)
       }
 
-      assign(req, { fields })
+      req.fields = {
+        ...req.fields,
+        ...fields,
+      }
       next()
     })
   }

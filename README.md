@@ -40,8 +40,8 @@ Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4v
 ## Development
 ### Setup
 Recommended setup
-- [Node.js](https://nodejs.org/en/) >= 8.5.0
-- [npm](https://www.npmjs.com/) >= 5.6.0
+- [Node.js](https://nodejs.org/en/) >= 10.16.0
+- [npm](https://www.npmjs.com/) >= 6.9.0
 
 To install multiple versions of Node.js, you may find it easier to use a node version manager
 - [nvm](https://github.com/creationix/nvm)

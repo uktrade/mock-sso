@@ -1,12 +1,11 @@
 const querystring = require('querystring')
-const { set } = require('lodash')
 
 const authorize = require('../../../app/oauth/authorize')
 
 describe('#authorize', () => {
   beforeEach(() => {
     this.nextMock = jest.fn()
-    this.requestMock = {}
+    this.requestMock = { query: {} }
     this.responseMock = {
       redirect: jest.fn(),
     }
@@ -18,11 +17,11 @@ describe('#authorize', () => {
       this.mockState = 'mock-state'
       this.mockCode = 'mock-code'
 
-      set(this.requestMock, 'query', {
+      this.requestMock.query = {
         redirect_uri: this.mockRedirectUri,
         state: this.mockState,
         code: this.mockCode,
-      })
+      }
 
       authorize()(this.requestMock, this.responseMock, this.nextMock)
     })
@@ -43,8 +42,6 @@ describe('#authorize', () => {
 
   describe('when expected query params are not passed', () => {
     beforeEach(() => {
-      set(this.requestMock, 'query', {})
-
       authorize()(this.requestMock, this.responseMock, this.nextMock)
     })
 

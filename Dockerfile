@@ -1,4 +1,4 @@
-FROM node:8.9.3
+FROM node:10.16.0
 MAINTAINER tools@digital.trade.gov.uk
 
 WORKDIR /usr/src/app

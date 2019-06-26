@@ -1,11 +1,9 @@
-const { set } = require('lodash')
-
 const token = require('../../../app/oauth/token')
 
 describe('#token', () => {
   beforeEach(() => {
     this.nextMock = jest.fn()
-    this.requestMock = {}
+    this.requestMock = { fields: {} }
     this.responseMock = {
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
@@ -16,7 +14,7 @@ describe('#token', () => {
     beforeEach(() => {
       this.mockCode = 'mock-code'
 
-      set(this.requestMock, 'fields', { code: this.mockCode })
+      this.requestMock.fields = { code: this.mockCode }
 
       token()(this.requestMock, this.responseMock, this.nextMock)
     })
@@ -43,8 +41,6 @@ describe('#token', () => {
 
   describe('when expected body params are not passed', () => {
     beforeEach(() => {
-      set(this.requestMock, 'fields', {})
-
       token()(this.requestMock, this.responseMock, this.nextMock)
     })
 
