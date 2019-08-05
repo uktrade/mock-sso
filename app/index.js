@@ -9,6 +9,7 @@ const oAuthIntrospect = require('./oauth/introspect')
 const oAuthGetUserDetails = require('./oauth/user')
 const parseFormData = require('./form-data/parse')
 const ping = require('./healthcheck/ping')
+const userApi = require('./api/user')
 const catchAllErrors = require('./errors/catch-all')
 
 const app = express()
@@ -19,6 +20,8 @@ app.post('/o/token', parseFormData(), oAuthToken())
 app.post('/o/introspect', oAuthIntrospect(scope, username))
 app.get('/api/v1/user/me', oAuthGetUserDetails(token, validateToken === 'true'))
 app.get('/healthcheck', ping)
+app.get('/api/v1/user/search/', userApi.search)
+app.get('/api/v1/user/introspect/', userApi.introspect)
 
 app.use(catchAllErrors())
 
