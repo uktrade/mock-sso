@@ -15,7 +15,10 @@ module.exports = {
       users = data
     }
 
-    res.json(users)
+    res.json({
+      count: users.length,
+      results: users,
+    })
   },
   introspect: (req, res) => {
     const uuid = req.query.user_id
