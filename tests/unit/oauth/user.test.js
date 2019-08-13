@@ -21,7 +21,7 @@ describe('#user', () => {
       last_name: 'Holland',
       permitted_applications: [{ key: 'datahub-crm' }, { key: 'datahub-mi' }, { key: 'market-access' }],
       related_emails: [],
-      user_id: 123,
+      user_id: '20a0353f-a7d1-4851-9af8-1bcaff152b60',
     }
   })
 
