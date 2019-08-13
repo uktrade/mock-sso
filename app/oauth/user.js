@@ -33,7 +33,7 @@ const user = (configToken, validateToken) => {
 
     const response = {
       'email': 'vyvyan.holland@email.com',
-      'user_id': 123,
+      'user_id': '20a0353f-a7d1-4851-9af8-1bcaff152b60',
       'first_name': 'Vyvyan',
       'last_name': 'Holland',
       'related_emails': [],
