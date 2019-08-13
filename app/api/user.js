@@ -23,7 +23,8 @@ module.exports = {
   introspect: (req, res) => {
     const uuid = req.query.user_id
     const email = req.query.email
-    const user = data.find(findUserByProp((uuid ? 'user_id' : 'email'), (uuid || email)))
+    const args = (uuid ? ['user_id', uuid] : ['email', email])
+    const user = data.find(findUserByProp(...args))
 
     if (user) {
       res.json(user)
