@@ -16,6 +16,7 @@ describe('#user', () => {
     this.validUserResponse = {
       access_profiles: [],
       email: 'vyvyan.holland@email.com',
+      contact_email: 'vyvyan.holland@contact-email.com',
       first_name: 'Vyvyan',
       groups: [],
       last_name: 'Holland',
