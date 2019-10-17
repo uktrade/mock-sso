@@ -40,7 +40,7 @@ const user = (configToken, validateToken) => {
         'last_name': 'STAFF',
         'related_emails': [],
         'groups': [],
-        'permitted_applications': [],
+        'permitted_applications': [{ key: 'datahub-crm' }],
         'access_profiles': [],
       }
 

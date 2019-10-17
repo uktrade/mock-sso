@@ -138,7 +138,7 @@ describe('#user', () => {
         first_name: 'LEP',
         groups: [],
         last_name: 'STAFF',
-        permitted_applications: [],
+        permitted_applications: [{ key: 'datahub-crm' }],
         related_emails: [],
         user_id: '20a0353f-a7d1-4851-9af8-1bcaff152b61',
       }
