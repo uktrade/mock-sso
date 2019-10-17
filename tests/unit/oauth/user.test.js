@@ -128,4 +128,33 @@ describe('#user', () => {
       expect(this.responseMock.send).toHaveBeenCalledWith(this.validUserResponse)
     })
   })
+
+  describe('with a LEP valid token', () => {
+    beforeEach(() => {
+      this.validLepUserResponse = {
+        access_profiles: [],
+        email: 'LEP.STAFF@email.com',
+        contact_email: 'LEP.STAFF@contact-email.com',
+        first_name: 'LEP',
+        groups: [],
+        last_name: 'STAFF',
+        permitted_applications: [],
+        related_emails: [],
+        user_id: '20a0353f-a7d1-4851-9af8-1bcaff152b61',
+      }
+      this.mockToken = 'lepStaffToken'
+
+      this.requestMock.headers.authorization = `Bearer ${this.mockToken}`
+      this.middleware = user(this.mockToken)(this.requestMock, this.responseMock, this.nextMock)
+    })
+
+    test('next should not be called', () => {
+      expect(this.nextMock).not.toHaveBeenCalled()
+    })
+
+    test('a 200 with a valid response shoulld be returned', () => {
+      expect(this.responseMock.status).toHaveBeenCalledWith(200)
+      expect(this.responseMock.send).toHaveBeenCalledWith(this.validLepUserResponse)
+    })
+  })
 })

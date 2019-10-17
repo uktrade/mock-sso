@@ -31,6 +31,22 @@ const user = (configToken, validateToken) => {
       }
     }
 
+    if (header.includes('lepStaffToken')) {
+      const response = {
+        'email': 'LEP.STAFF@email.com',
+        'contact_email': 'LEP.STAFF@contact-email.com',
+        'user_id': '20a0353f-a7d1-4851-9af8-1bcaff152b61',
+        'first_name': 'LEP',
+        'last_name': 'STAFF',
+        'related_emails': [],
+        'groups': [],
+        'permitted_applications': [],
+        'access_profiles': [],
+      }
+
+      return res.status(200).send(response)
+    }
+
     const response = {
       'email': 'vyvyan.holland@email.com',
       'contact_email': 'vyvyan.holland@contact-email.com',
