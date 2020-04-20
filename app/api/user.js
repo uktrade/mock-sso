@@ -22,8 +22,14 @@ module.exports = {
   },
   introspect: (req, res) => {
     const uuid = req.query.user_id
+    const emailUserId = req.query.email_user_id
     const email = req.query.email
-    const args = (uuid ? ['user_id', uuid] : ['email', email])
+    const args = (
+      uuid
+        ? ['user_id', uuid]
+        : emailUserId
+          ? ['email_user_id', emailUserId]
+          : ['email', email])
     const user = data.find(findUserByProp(...args))
 
     if (user) {

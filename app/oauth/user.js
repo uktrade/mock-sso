@@ -35,6 +35,7 @@ const user = (configToken, validateToken) => {
       const response = {
         'email': 'LEP.STAFF@email.com',
         'contact_email': 'LEP.STAFF@contact-email.com',
+        'email_user_id': 'LEP.STAFF-20a0353f@id.mock-sso',
         'user_id': '20a0353f-a7d1-4851-9af8-1bcaff152b61',
         'first_name': 'LEP',
         'last_name': 'STAFF',
@@ -50,6 +51,7 @@ const user = (configToken, validateToken) => {
     const response = {
       'email': 'vyvyan.holland@email.com',
       'contact_email': 'vyvyan.holland@contact-email.com',
+      'email_user_id': 'vyvyan.holland-20a0353f@id.mock-sso',
       'user_id': '20a0353f-a7d1-4851-9af8-1bcaff152b60',
       'first_name': 'Vyvyan',
       'last_name': 'Holland',

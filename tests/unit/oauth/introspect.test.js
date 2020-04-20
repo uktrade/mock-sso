@@ -37,7 +37,7 @@ describe('#introspect', () => {
     })
   })
 
-  describe('with scope and username', () => {
+  describe('with scope and username, without email_user_id', () => {
     beforeEach(() => {
       this.mockUsername = 'murphy'
       introspect(this.mockScope, this.mockUsername)(this.requestMock, this.responseMock, this.nextMock)
@@ -58,6 +58,36 @@ describe('#introspect', () => {
     test('response send argument should be as expected', () => {
       expect(this.responseMock.send.mock.calls[0][0]).toEqual({
         active: true,
+        exp: 2524608000,
+        scope: this.mockScope,
+        username: this.mockUsername,
+      })
+    })
+  })
+
+  describe('with scope, username, and email_user_id', () => {
+    beforeEach(() => {
+      this.mockUsername = 'murphy'
+      this.mockEmailUserId = 'murphy@id.mock-sso'
+      introspect(this.mockScope, this.mockUsername, this.mockEmailUserId)(this.requestMock, this.responseMock, this.nextMock)
+    })
+
+    test('response status should be called', () => {
+      expect(this.responseMock.status).toHaveBeenCalled()
+    })
+
+    test('response status argument should be 200', () => {
+      expect(this.responseMock.status).toHaveBeenCalledWith(200)
+    })
+
+    test('response send should be called', () => {
+      expect(this.responseMock.send).toHaveBeenCalled()
+    })
+
+    test('response send argument should be as expected', () => {
+      expect(this.responseMock.send.mock.calls[0][0]).toEqual({
+        active: true,
+        email_user_id: this.mockEmailUserId,
         exp: 2524608000,
         scope: this.mockScope,
         username: this.mockUsername,

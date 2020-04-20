@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 
-const { port, scope, username, token, validateToken } = require('./config')
+const { port, scope, username, emailUserID, token, validateToken } = require('./config')
 
 const oAuthAuthorize = require('./oauth/authorize')
 const oAuthToken = require('./oauth/token')
@@ -17,7 +17,7 @@ app.use(morgan('dev'))
 
 app.get('/o/authorize', oAuthAuthorize())
 app.post('/o/token', parseFormData(), oAuthToken())
-app.post('/o/introspect', oAuthIntrospect(scope, username))
+app.post('/o/introspect', oAuthIntrospect(scope, username, emailUserID))
 app.get('/api/v1/user/me', oAuthGetUserDetails(token, validateToken === 'true'))
 app.get('/healthcheck', ping)
 app.get('/api/v1/user/search/', userApi.search)
