@@ -80,9 +80,20 @@ describe('User API', () => {
         })
       })
 
-      describe('When the user email matches', () => {
+      describe('When the user email_user_id matches', () => {
         it('Returns the user', () => {
           const user = users[ 2 ]
+
+          this.requestMock.query.email_user_id = user.email_user_id
+          controller.introspect(this.requestMock, this.responseMock)
+
+          expect(this.responseMock.json).toHaveBeenCalledWith(user)
+        })
+      })
+
+      describe('When the user email matches', () => {
+        it('Returns the user', () => {
+          const user = users[ 3 ]
 
           this.requestMock.query.email = user.email
           controller.introspect(this.requestMock, this.responseMock)

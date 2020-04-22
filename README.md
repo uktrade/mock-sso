@@ -18,8 +18,10 @@ A simple app for testing the cogs involved with SSO integration. Simply replies 
     - [Query parameters](#query-parameters)
   - [/o/token](#post-otoken)
     - [Body parameters](#body-parameters)
-  - [/api/v1/user/me/](#get-user)
+  - [/api/v1/user/me/](#/api/v1/user/me/)
     - [Body parameters](#body-parameters)
+  - [/api/v1/user/search](#/api/v1/user/search/)
+  - [/api/v1/user/introspect](#/api/v1/user/introspect/)
 
   - [/healthcheck](#get-healthcheck)
 - [Docker](#docker)
@@ -33,6 +35,7 @@ Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4v
 |:------------------------|:------------------------------------------------|
 | MOCK_SSO_PORT           | The applications port, defaults to `8080`       |
 | MOCK_SSO_USERNAME       | The SSO username to create an SSO token for.    |
+| MOCK_SSO_EMAIL_USER_ID  | The required SSO email user id.                 |
 | MOCK_SSO_SCOPE          | The required introspect scope                   |
 | MOCK_SSO_TOKEN          | The required user token for optional validation |
 | MOCK_SSO_VALIDATE_TOKEN | Whether to validate the token for the user      |
@@ -89,7 +92,8 @@ environment variable `MOCK_SSO_USERNAME`. This will then return the following re
   "active": true,
   "exp": 2524608000,
   "scope": <MOCK_SSO_SCOPE>,
-  "username": <MOCK_SSO_USERNAME>
+  "username": <MOCK_SSO_USERNAME>,
+  "email_user_id": <MOCK_SSO_EMAIL_USER_ID>,
 }
 ```
 
@@ -113,7 +117,7 @@ A `POST` request to `/o/token` will reply with you back to you with a JSON respo
 ```
 
 ### /api/v1/user/me/
-A `POST` request to `/api/v1/user/me/` will reply back to you with:
+A `GET` request to `/api/v1/user/me/` will reply back to you with:
 
 #### Without an Authorization header or missing Bearer prefix
 
@@ -128,6 +132,7 @@ A `statusCode` of 200 and a JSON response of
 ```
 {
     email: <email>,
+    email_user_id: <string>,
     user_id: <id>,
     first_name: <string>,
     last_name: <string>,
@@ -146,6 +151,46 @@ A `statusCode` of 200 and a JSON response of
       ...
     ]
 }
+```
+
+### /api/v1/user/search/
+A `GET` request to `/api/v1/user/search/` will reply back to you with a `statusCode` of 200 and a JSON response of a list of all users, filtered so that either `first_name` or `last_name` includes the search string passed with as the `autocomplete` parameter.
+
+```
+[
+  {
+    "user_id": <id>,
+    "first_name": <string>,
+    "last_name": <string>,
+    "email": <email>,
+    "email_user_id": <string>
+  }
+  ...
+]
+```
+
+#### Body parameters
+| Name          | Description                                 |
+|:--------------|:--------------------------------------------|
+|`autocomplete`         | The search string you wish to use to find a user |
+
+### /api/v1/user/introspect/
+A `GET` request to `/api/v1/user/instrospect/` will reply back to you with:
+
+#### Without `user_id`, `email_user_id` or `email` query parameters matching an existing user
+A `statusCode` of 404
+
+#### With `user_id`, `email_user_id` or `email` query parameters
+A JSON response containing information about the matching user
+
+```
+{
+    "user_id": <id>,
+    "first_name": <string>,
+    "last_name": <string>,
+    "email": <email>,
+    "email_user_id": <string>
+  }
 ```
 
 ### /healthcheck
