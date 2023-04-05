@@ -5,6 +5,7 @@ const config = {
   emailUserId: process.env.MOCK_SSO_EMAIL_USER_ID,
   token: process.env.MOCK_SSO_TOKEN,
   validateToken: process.env.MOCK_SSO_VALIDATE_TOKEN,
+  code: process.env.MOCK_SSO_CODE,
 }
 
 module.exports = config

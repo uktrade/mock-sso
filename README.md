@@ -37,6 +37,7 @@ Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4v
 | MOCK_SSO_USERNAME       | The SSO username to create an SSO token for.    |
 | MOCK_SSO_EMAIL_USER_ID  | The required SSO email user id.                 |
 | MOCK_SSO_SCOPE          | The required introspect scope                   |
+| MOCK_SSO_CODE           | The code passed to the source application       |
 | MOCK_SSO_TOKEN          | The required user token for optional validation |
 | MOCK_SSO_VALIDATE_TOKEN | Whether to validate the token for the user      |
 
@@ -105,7 +106,7 @@ A `GET` request to `/o/authorize` will redirect you back to `redirect_uri?state=
 |:--------------|:--------------------------------------------|
 |`redirect_uri` | Your applications OAuth callback url        |
 |`state`        | Your applications stateId                   |
-|`code`         | The token you wish to be sent back from SSO |
+|`code`         | The token you wish to be sent back from SSO. Alternatively, use the MOCK_SSO_CODE environment variable |
 
 ### /o/token
 A `POST` request to `/o/token` will reply with you back to you with a JSON response of
