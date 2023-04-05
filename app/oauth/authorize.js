@@ -1,14 +1,19 @@
 const querystring = require('querystring')
 
-const authorize = () => {
+const authorize = (externalCode) => {
   return function (req, res, next) {
     const { redirect_uri: redirectUri, state, code } = req.query
+    const redirectCode = code || externalCode
 
-    if (redirectUri && state && code) {
-      return res.redirect(`${redirectUri}?${querystring.stringify({ state, code })}`)
+    if (!redirectCode) {
+      return next(Error('Please provide code via param or environment variable'))
     }
 
-    return next(Error('Please provide redirect_uri, state and code params'))
+    if (redirectUri && state) {
+      return res.redirect(`${redirectUri}?${querystring.stringify({ state, code:redirectCode })}`)
+    }
+
+    return next(Error('Please provide redirect_uri and state params'))
   }
 }
 
