@@ -5,7 +5,7 @@ function invalidRequest (res, error) {
   return res.status(400).json({ error: 'invalid_request' })
 }
 
-const user = (configToken, validateToken) => {
+const user = (configToken, userEmail, userContactEmail, validateToken) => {
   return function (req, res, next) {
     if (!configToken) {
       return next(new Error('Please provide configToken'))
@@ -49,8 +49,8 @@ const user = (configToken, validateToken) => {
     }
 
     const response = {
-      'email': 'vyvyan.holland@email.com',
-      'contact_email': 'vyvyan.holland@contact-email.com',
+      'email': userEmail || 'vyvyan.holland@email.com',
+      'contact_email': userContactEmail || 'vyvyan.holland@contact-email.com',
       'email_user_id': 'vyvyan.holland-20a0353f@id.mock-sso',
       'user_id': '20a0353f-a7d1-4851-9af8-1bcaff152b60',
       'first_name': 'Vyvyan',
