@@ -31,15 +31,17 @@ A simple app for testing the cogs involved with SSO integration. Simply replies 
 Thanks for the thoughts and influence from [r4vi/fakesso](https://github.com/r4vi/fakesso)
 
 ## Environment variables
-| Name                    |  Description                                    |
-|:------------------------|:------------------------------------------------|
-| MOCK_SSO_PORT           | The applications port, defaults to `8080`       |
-| MOCK_SSO_USERNAME       | The SSO username to create an SSO token for.    |
-| MOCK_SSO_EMAIL_USER_ID  | The required SSO email user id.                 |
-| MOCK_SSO_SCOPE          | The required introspect scope                   |
-| MOCK_SSO_CODE           | The code passed to the source application       |
-| MOCK_SSO_TOKEN          | The required user token for optional validation |
-| MOCK_SSO_VALIDATE_TOKEN | Whether to validate the token for the user      |
+| Name                            |  Description                                        |
+|:--------------------------------|:----------------------------------------------------|
+| MOCK_SSO_PORT                   | The applications port, defaults to `8080`           |
+| MOCK_SSO_USERNAME               | The SSO username to create an SSO token for.        |
+| MOCK_SSO_USER_EMAIL             | An optional value for the SSO user email.           |
+| MOCK_SSO_USER_CONTACT_EMAIL     | An optional value for the SSO user contact email.   |
+| MOCK_SSO_EMAIL_USER_ID          | The required SSO email user id.                     |
+| MOCK_SSO_SCOPE                  | The required introspect scope                       |
+| MOCK_SSO_CODE                   | The code passed to the source application           |
+| MOCK_SSO_TOKEN                  | The required user token for optional validation     |
+| MOCK_SSO_VALIDATE_TOKEN         | Whether to validate the token for the user          |
 
 ## Development
 ### Setup

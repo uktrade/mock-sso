@@ -85,7 +85,7 @@ describe('#user', () => {
 
     describe('With validateToken set to true', () => {
       beforeEach(() => {
-        this.middleware = user(this.mockToken, true)(this.requestMock, this.responseMock, this.nextMock)
+        this.middleware = user(this.mockToken, undefined, undefined, true)(this.requestMock, this.responseMock, this.nextMock)
       })
 
       test('next should not be called', () => {
@@ -157,6 +157,50 @@ describe('#user', () => {
     test('a 200 with a valid response shoulld be returned', () => {
       expect(this.responseMock.status).toHaveBeenCalledWith(200)
       expect(this.responseMock.send).toHaveBeenCalledWith(this.validLepUserResponse)
+    })
+  })
+  describe('with a user email', () => {
+    beforeEach(() => {
+      this.requestMock.headers.authorization = 'Bearer ' + this.mockToken
+      this.middleware = user(this.mockToken, 'useremail@digital.trade.gov.uk')(
+        this.requestMock,
+        this.responseMock,
+        this.nextMock
+      )
+    })
+
+    test('next should not be called', () => {
+      expect(this.nextMock).not.toHaveBeenCalled()
+    })
+
+    test('user email should be overriden', () => {
+      expect(this.responseMock.status).toHaveBeenCalledWith(200)
+      expect(this.responseMock.send).toHaveBeenCalledWith({
+        ...this.validUserResponse,
+        email: 'useremail@digital.trade.gov.uk',
+      })
+    })
+  })
+  describe('with a user contact email', () => {
+    beforeEach(() => {
+      this.requestMock.headers.authorization = 'Bearer ' + this.mockToken
+      this.middleware = user(
+        this.mockToken,
+        undefined,
+        'usercontactemail@digital.trade.gov.uk',
+      )(this.requestMock, this.responseMock, this.nextMock)
+    })
+
+    test('next should not be called', () => {
+      expect(this.nextMock).not.toHaveBeenCalled()
+    })
+
+    test('user contact email should be overriden', () => {
+      expect(this.responseMock.status).toHaveBeenCalledWith(200)
+      expect(this.responseMock.send).toHaveBeenCalledWith({
+        ...this.validUserResponse,
+        contact_email: 'usercontactemail@digital.trade.gov.uk',
+      })
     })
   })
 })
