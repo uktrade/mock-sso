@@ -10,7 +10,7 @@ const authorize = (externalCode) => {
     }
 
     if (redirectUri && state) {
-      return res.redirect(`${redirectUri}?${querystring.stringify({ state, code:redirectCode })}`)
+      return res.redirect(`${redirectUri}?${querystring.stringify({ state, code: redirectCode })}`)
     }
 
     return next(Error('Please provide redirect_uri and state params'))

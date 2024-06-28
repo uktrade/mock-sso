@@ -12,13 +12,9 @@
     "url": "https://github.com/uktrade/mock-sso"
   },
   "engines": {
-    "node": "10.16.0",
-    "npm": "6.x"
+    "node": "16.20.2",
+    "npm": "8.x"
   },
-  "author": "Ben Chidgey <ben@feedmypixel.com> (http://feedmypixel.com)",
-  "contributors": [
-    "Ben Chidgey <ben@feedmypixel.com> (http://feedmypixel.com)"
-  ],
   "main": "app/index.js",
   "license": "Apache-2.0",
   "bugs": "https://github.com/uktrade/mock-sso/issues",

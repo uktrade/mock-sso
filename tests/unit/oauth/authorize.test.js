@@ -55,7 +55,9 @@ describe('#authorize', () => {
 
     test('error message should be as expected', () => {
       expect(this.nextMock.mock.calls[0][0].message).toEqual(
-        expect.stringMatching('Please provide redirect_uri, state and code params')
+        expect.stringMatching(
+          'Please provide code via param or environment variable'
+        )
       )
     })
   })
