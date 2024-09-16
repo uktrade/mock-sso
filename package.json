@@ -24,7 +24,7 @@
     "start": "node app/index.js"
   },
   "devDependencies": {
-    "eslint": "^9.10.0",
+    "eslint": "8.57.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.4.2",
