@@ -5,6 +5,10 @@
     "node": true,
     "jest": true
   },
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module"
+  },
   "rules": {
     "comma-dangle": [
       "error",
