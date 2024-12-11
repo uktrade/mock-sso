@@ -35,7 +35,7 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "formidable": "^1.1.1",
     "morgan": "^1.9.0"
   }
